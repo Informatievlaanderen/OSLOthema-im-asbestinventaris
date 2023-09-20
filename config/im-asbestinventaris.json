@@ -3,7 +3,7 @@
   "name": "asbestinventaris",
   "type": "ap",
   "eap": "asbestinventaris.eap",
-  "diagram": "AsbestinventarisDiagram",
+  "diagram": "asbestinventarisDiagram",
   "template": "im-asbestinventaris.j2",
   "title": "Implementatiemodel asbestinventaris",
   "publication-state": "https://data.vlaanderen.be/id/concept/StandaardStatus/OntwerpStandaard",

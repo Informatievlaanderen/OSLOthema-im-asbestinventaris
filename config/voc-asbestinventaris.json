@@ -3,7 +3,7 @@
   "name": "asbestinventaris",
   "type": "voc",
   "eap": "asbestinventaris.eap",
-  "diagram": "AsbestinventarisDiagram",
+  "diagram": "asbestinventarisDiagram",
   "template": "asbestinventaris-voc.j2",
   "title": "Ondersteunend Vocabularium asbestinventaris",
   "publication-state": "https://data.vlaanderen.be/id/concept/StandaardStatus/OntwerpStandaard",
