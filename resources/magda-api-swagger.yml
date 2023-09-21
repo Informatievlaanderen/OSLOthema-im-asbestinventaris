@@ -1,0 +1,491 @@
+openapi: "3.0.2"
+info:
+  title: "Digitaal Vlaanderen - OVAM Asbestinventarisatie"
+  description: "Deze API biedt de mogelijkheid om alle informatie op te zoeken en te raadplegen van een asbestinventaris"
+  contact:
+    name: "OVAM"
+    url: "https://www.ovam.be/contacteer-ons"
+  license:
+    name: "OVAM - Openbare Vlaamse Afvalstoffenmaatschappij"
+    url: "https://www.ovam.be"
+  version: "1.0.0"
+servers:
+  - url: "https://asbestinventaris-uat.ovam.be/asbestinventaris/api"
+    description: "UAT server"
+  - url: "https://asbestinventaris.ovam.be/asbestinventaris/api"
+    description: "Production server"
+paths:
+  /gebouweenheid/{gebouweenheidId}:
+    get:
+      tags:
+        - "Gebouweenheid"
+      summary: "Raadpleeg alle informatie die gekend is van een gebouweenheid"
+      parameters:
+        - name: x-correlation-id
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/Correlation-Id'
+        - name: gebouweenheidId
+          in: path
+          required: true
+          description: "Id van de gebouweenheid waarvoor gegevens opgevraagd worden"
+          schema:
+            type: string
+      responses:
+        200:
+          description: "Alle informatie die gekend is van een gebouweenheid"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InventarisSummary"
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/InvalidAuthorization'
+        403:
+          $ref: '#/components/responses/Forbidden'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/UnexpectedServerError'
+        502:
+          $ref: '#/components/responses/BadGateway'
+        503:
+          $ref: '#/components/responses/ServiceUnavailable'
+        504:
+          $ref: '#/components/responses/GatewayTimeout'
+
+  /inventaris/{asbestinventarisId}:
+      get:
+          tags:
+              - "Asbestinventaris"
+          summary: "Raadpleeg alle informatie die gekend is van een asbestinventaris"
+          parameters:
+              - name: x-correlation-id
+                in: header
+                required: true
+                schema:
+                    $ref: '#/components/schemas/Correlation-Id'
+              - name: asbestinventarisId
+                in: path
+                required: true
+                description: "Id van de asbestinventaris waarvoor gegevens opgevraagd worden"
+                schema:
+                    type: string
+                    format: uuid
+          responses:
+              200:
+                  description: "De details van de asbestinventaris"
+                  content:
+                      application/json:
+                          schema:
+                              $ref: "#/components/schemas/Asbestinventaris"
+              400:
+                  $ref: '#/components/responses/BadRequest'
+              401:
+                  $ref: '#/components/responses/InvalidAuthorization'
+              403:
+                  $ref: '#/components/responses/Forbidden'
+              404:
+                  $ref: '#/components/responses/NotFound'
+              500:
+                  $ref: '#/components/responses/UnexpectedServerError'
+              502:
+                  $ref: '#/components/responses/BadGateway'
+              503:
+                  $ref: '#/components/responses/ServiceUnavailable'
+              504:
+                  $ref: '#/components/responses/GatewayTimeout'
+  /bronfiche/{bronficheId}:
+      get:
+          tags:
+              - "Bronfiche"
+          summary: "Raadpleeg alle informatie van een bronfiche"
+          parameters:
+              -   name: x-correlation-id
+                  in: header
+                  required: true
+                  schema:
+                      $ref: '#/components/schemas/Correlation-Id'
+              -   name: bronficheId
+                  in: path
+                  required: true
+                  description: "Id van de bronfiche waarvoor de gegevens opgevraagd worden"
+                  schema:
+                      type: string
+                      format: uuid
+          responses:
+              200:
+                  description: "Details van de bronfiche"
+                  content:
+                      application/json:
+                          schema:
+                              $ref: "#/components/schemas/Bronfiche"
+              400:
+                  $ref: '#/components/responses/BadRequest'
+              401:
+                  $ref: '#/components/responses/InvalidAuthorization'
+              403:
+                  $ref: '#/components/responses/Forbidden'
+              404:
+                  $ref: '#/components/responses/NotFound'
+              500:
+                  $ref: '#/components/responses/UnexpectedServerError'
+              502:
+                  $ref: '#/components/responses/BadGateway'
+              503:
+                  $ref: '#/components/responses/ServiceUnavailable'
+              504:
+                  $ref: '#/components/responses/GatewayTimeout'
+
+  /afvalfiche/{afvalficheId}:
+      get:
+          tags:
+              - "Afvalfiche"
+          summary: "Raadpleeg alle informatie van een afvalfiche"
+          parameters:
+              -   name: x-correlation-id
+                  in: header
+                  required: true
+                  schema:
+                      $ref: '#/components/schemas/Correlation-Id'
+              -   name: afvalficheId
+                  in: path
+                  required: true
+                  description: "Id van de afvalfiche waarvoor de gegevens opgevraagd worden"
+                  schema:
+                      type: string
+                      format: uuid
+          responses:
+              200:
+                  description: "Details van de afvalfiche"
+                  content:
+                      application/json:
+                          schema:
+                              $ref: "#/components/schemas/Afvalfiche"
+              400:
+                  $ref: '#/components/responses/BadRequest'
+              401:
+                  $ref: '#/components/responses/InvalidAuthorization'
+              403:
+                  $ref: '#/components/responses/Forbidden'
+              404:
+                  $ref: '#/components/responses/NotFound'
+              500:
+                  $ref: '#/components/responses/UnexpectedServerError'
+              502:
+                  $ref: '#/components/responses/BadGateway'
+              503:
+                  $ref: '#/components/responses/ServiceUnavailable'
+              504:
+                  $ref: '#/components/responses/GatewayTimeout'
+
+  /inventaris/{asbestinventarisId}/attest:
+      get:
+          tags:
+              - "Asbestinventaris"
+          summary: "Download het pdf attest van een asbestinventaris"
+          parameters:
+              - name: x-correlation-id
+                in: header
+                required: true
+                schema:
+                    $ref: '#/components/schemas/Correlation-Id'
+              - name: asbestinventarisId
+                in: path
+                required: true
+                description: "Id van de asbestinventaris waarvoor het attest opgevraagd wordt"
+                schema:
+                    type: string
+                    format: uuid
+          responses:
+              200:
+                  description: "Het pdf attest horende bij de asbestinventaris"
+                  content:
+                      application/pdf:
+                          schema:
+                              type: string
+                              format: binary
+              400:
+                  $ref: '#/components/responses/BadRequest'
+              401:
+                  $ref: '#/components/responses/InvalidAuthorization'
+              403:
+                  $ref: '#/components/responses/Forbidden'
+              404:
+                  $ref: '#/components/responses/NotFound'
+              500:
+                  $ref: '#/components/responses/UnexpectedServerError'
+              502:
+                  $ref: '#/components/responses/BadGateway'
+              503:
+                  $ref: '#/components/responses/ServiceUnavailable'
+              504:
+                  $ref: '#/components/responses/GatewayTimeout'
+  /analyserapport/{analyseRapportId}:
+      get:
+          tags:
+              - "Analyserapport"
+          summary: "Download een analyserapport"
+          parameters:
+              - name: x-correlation-id
+                in: header
+                required: true
+                schema:
+                    $ref: '#/components/schemas/Correlation-Id'
+              - name: analyseRapportId
+                in: path
+                required: true
+                description: "Id van het analyserapport"
+                schema:
+                    type: string
+                    format: uuid
+          responses:
+              200:
+                  description: "Een analyserapport in pdf dat geüpload werd door de deskundige"
+                  content:
+                      application/pdf:
+                          schema:
+                              type: string
+                              format: binary
+              400:
+                  $ref: '#/components/responses/BadRequest'
+              401:
+                  $ref: '#/components/responses/InvalidAuthorization'
+              403:
+                  $ref: '#/components/responses/Forbidden'
+              404:
+                  $ref: '#/components/responses/NotFound'
+              500:
+                  $ref: '#/components/responses/UnexpectedServerError'
+              502:
+                  $ref: '#/components/responses/BadGateway'
+              503:
+                  $ref: '#/components/responses/ServiceUnavailable'
+              504:
+                  $ref: '#/components/responses/GatewayTimeout'
+components:
+ parameters:
+    CorrelationId:
+      name: x-correlation-id
+      in: header
+      required: true
+      schema:
+        $ref: '#/components/schemas/Correlation-Id'
+ responses:
+    #HTTP Status 400
+    BadRequest:
+      description: "Invalid data supplied"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 401
+    InvalidAuthorization:
+      description: "Invalid authorization"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 403
+    Forbidden:
+      description: "Authentication failed"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 404
+    NotFound:
+      description: "Resource not found"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 412
+    PreConditionFailed:
+      description: "Precondition Failed"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 500
+    UnexpectedServerError:
+      description: "Unexpected Server Error"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 502
+    BadGateway:
+      description: "Bad Gateway"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 503
+    ServiceUnavailable:
+      description: "Service unavailable"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    #HTTP Status 504
+    GatewayTimeout:
+      description: "Gateway Timeout"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+ schemas:
+    Correlation-Id:
+      description: "ID of the transaction. Use this ID for log tracing and incident handling"
+      type: string
+      minLength: 10
+      maxLength: 36
+
+    InventarisSummary:
+      description: "Beknopte lijst van gegevens van een inventaris"
+      type: array
+      items:
+          type: object
+          properties:
+              id:
+                type: string
+                format: uri
+
+    Asbestinventaris:
+      description: "Details van een inventaris"
+      type: object
+      properties:
+          id:
+              type: string
+              format: uri
+          attestNummer:
+              type: string
+          locatieBeschrijving:
+              type: string
+              description: "Betreft slechts een indicatie van de locatie. Het bevat niet de officiële locatiegegevens van de overheid"
+          resultaat:
+              type: string
+          aanleiding:
+              type: string
+          gemeenschappelijkDeel:
+              type: boolean
+          gemeenschappelijkeDelen:
+              type: array
+              items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uri
+          analyseRapporten:
+              type: array
+              items:
+                  type: object
+                  properties:
+                      encodingFormat:
+                          type: string
+                      contentUrl:
+                          type: string
+                          format: uri
+          uitgegevenOp:
+              type: string
+              format: date
+          geldigTot:
+              type: string
+              format: date
+          attest:
+              type: object
+              properties:
+                  encodingFormat:
+                    type: string
+                  contentUrl:
+                    type: string
+                    format: uri
+          aantalAsbestmaterialen:
+              type: integer
+          aantalBeperkingen:
+              type: integer
+          aantalUitsluitingen:
+              type: integer
+          asbestmaterialen:
+              type: array
+              items:
+                  type: object
+                  properties:
+                      id:
+                          type: string
+                          format: uri
+
+    Bronfiche:
+      description: "Details van een bronfiche"
+      type: object
+      properties:
+          id:
+              type: string
+              format: uri
+          beschrijving:
+              type: string
+          actie:
+              type: string
+          omgeving:
+              type: string
+          primaireDrager:
+              type: string
+          asbestmateriaal:
+              type: string
+          bindmiddel:
+              type: string
+          gebondenheid:
+              type: string
+          asbestsoort:
+              type: string
+          risicobeoordeling:
+              type: string
+          eenvoudigBereikbaar:
+              type: boolean
+          mijlpaal:
+              type: string
+    Afvalfiche:
+        description: "Details van een afvalfiche"
+        type: object
+        properties:
+            id:
+                type: string
+                format: uri
+            beschrijving:
+                type: string
+            actie:
+                type: string
+            omgeving:
+                type: string
+            primaireDrager:
+                type: string
+            asbestmateriaal:
+                type: string
+            bindmiddel:
+                type: string
+            gebondenheid:
+                type: string
+            asbestsoort:
+                type: string
+            eenvoudigBereikbaar:
+                type: boolean
+    ErrorMessage:
+      required:
+        - detail
+        - title
+      type: object
+      properties:
+        status:
+          type: string
+          description: "The HTTP status code generated by the origin server for this occurrence of the problem."
+        detail:
+          type: string
+          description: "A human-readable explanation specific to this occurrence of the problem."
+        instance:
+          type: string
+          description: "A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if de-referenced."
+      description: "A representation of a generic error message."
