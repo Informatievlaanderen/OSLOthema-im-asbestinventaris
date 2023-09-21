@@ -1,0 +1,93 @@
+{
+    "@context": {
+    "Asbestinventaris": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#Asbestinventaris",
+    "uitgegevenOp": {
+        "@id": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#uitgegevenOp",
+        "@type": "http://www.w3.org/2001/XMLSchema#date"
+    },
+    "resultaat": {
+        "@id": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#resultaat",
+		"@language" : "nl"
+    },
+    "locatieBeschrijving": {
+        "@id": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#locatiebeschrijving",
+		"@language" : "nl"
+    },
+    "id": "@id",
+	"gemeenschappelijkDelen" : {
+	  "@id": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#gemeenschappelijkDeel",
+	  "@type": "@id"
+	},
+    "gemeenschappelijkDeel": {
+        "@id": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#vanToepassingOpGemeenschappelijkDeel",
+        "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "geldigTot": {
+        "@id": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#geldigTot",
+        "@type": "http://www.w3.org/2001/XMLSchema#date"
+    },
+    "attestNummer": {
+        "@id": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#attestNummer",
+        "@type": "http://www.w3.org/2001/XMLSchema#string"
+    },
+    "attest": {
+	  "@id": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#attest",
+	  "@context" : {
+	     "contentUrl" : "@id"
+		 }
+	  },
+    "analyseRapporten": {
+      "@id": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#analyserapport",
+	  "@context" : {
+	     "contentUrl" : "@id"
+		 }
+	  },
+	  
+	"asbestmaterialen": {
+	  "@id": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#asbestmateriaal",
+	  "@type": "@id"
+	  },
+    "aantalUitsluitingen": {
+        "@id": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#aantalUitsluitingen",
+        "@type": "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "aantalBeperkingen": {
+        "@id": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#aantalBeperkingen",
+        "@type": "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "aantalAsbestMaterialen": {
+        "@id": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#aantalAsbestMaterialen",
+        "@type": "http://www.w3.org/2001/XMLSchema#integer"
+    },
+    "aanleiding": {
+        "@id": "https://implementatie.data.vlaanderen.be/ns/asbestinventaris#aanleiding",
+		"@language" : "nl"
+    },
+	"gebouwenregister" : "https://data.vlaanderen.be/id/gebouwenregister",
+	"ovam": "https://asbestinventaris.ovam.be/asbestinventaris/api/"
+	
+},
+    "@type": "Asbestinventaris"
+    "uitgegevenOp": "2023-04-10",
+    "resultaat": "Het is goed.",
+    "locatieBeschrijving": "Aan de boom",
+    "id": "ovam:a123",
+    "gemeenschappelijkDelen": ["gebouwenregister:1321321321"],
+	"gemeenschappelijkDeel": true,
+    "geldigTot": "2023-05-11",
+    "attestNummer": "a-2023-a123",
+    "attest": {	"encodingFormat" : "application/pdf",
+	            "contentUrl": "ovam:attest/123"
+				},
+    "analyseRapporten": 
+			[{	"encodingFormat" : "application/pdf",
+	            "contentUrl": "ovam:analyserapport/455" },
+			 {  "encodingFormat" : "application/pdf",
+			    "contentUrl": "ovam:analyserapport/8998"
+				}],
+	"asbestmaterialen": ["ovam:materiaal/ab1"],
+    "aantalUitsluitingen": 3,
+    "aantalBeperkingen": "4",
+    "aantalAsbestMaterialen": "5",
+    "aanleiding": "Een gevraagd onderzoek"
+}
