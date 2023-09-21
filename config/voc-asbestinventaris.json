@@ -4,7 +4,7 @@
   "type": "voc",
   "eap": "asbestinventaris.eap",
   "diagram": "asbestinventarisDiagram",
-  "template": "asbestinventaris-voc.j2",
+  "template": "voc-asbestinventaris.j2",
   "title": "Ondersteunend Vocabularium asbestinventaris",
   "publication-state": "https://data.vlaanderen.be/id/concept/StandaardStatus/OntwerpStandaard",
   "publication-date": "2023-09-13",
